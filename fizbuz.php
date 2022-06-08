@@ -41,6 +41,7 @@ function fizzbuz($liste)
 echo '<br>version fizzbuz % <br> ';
 fizzbuz($liste);
 
+
 //fizzbuzz en une function un peu plus securise
 function fizzbuzz(array $liste)
 {
@@ -113,78 +114,75 @@ $fiz = new Fiz;
 $buz = $fiz->fibuz($liste);
 
 
-//version en class fluent
+//version en class try cach +fluent
 class Fizf
 {
-  /**
-   * @var array
-   */
+
   public $liste;
 
-  /**
-   * Get the value of liste
-   *
-   * @return  array
-   */
   public function getListe()
   {
     return $this->liste;
   }
 
-  /**
-   * Set the value of liste
-   *
-   * @param  array  $liste
-   *
-   * @return  self
-   */
+
   public function setListe(array $liste)
   {
-    $this->liste = $liste;
+    if (is_array($liste)) {
+      $this->liste = $liste;
+    } else {
+      throw new Exception("liste pas valid");
+    }
+
 
     return $this;
   }
 
-  /**
-   * isDiv
-   *
-   * @param  int $number
-   * @param  int $divident
-   * @return bool
-   */
+
   private function isDiv(int $number, int $divident): bool
   {
+    if (empty($number)) {
+      throw new Exception("number pas valid");
+    }
+    if (empty($divident)) {
+      throw new Exception("divident pas valid");
+    }
     return ($number % $divident === 0);
   }
 
-  /**
-   * fibuz8
-   *
-   * @param  array $liste
-   * @return void
-   */
+
   public function fibuzf(): void
   {
-    foreach ($this->liste as $a) {
-      if ($this->isDiv((int)$a, 3) && $this->isDiv((int)$a, 5)) {
-        echo 'f-Fizzbuzz <br> ';
-      } elseif ($this->isDiv((int)$a, 3)) {
-        echo 'f-Fizz <br> ';
-      } elseif ($this->isDiv((int)$a, 5)) {
-        echo 'f-Buz <br> ';
-      } else {
-        echo $a . ' <br> ';
+    if (!empty($this->liste)) {
+      foreach ($this->liste as $a) {
+        if ($this->isDiv((int)$a, 3) && $this->isDiv((int)$a, 5)) {
+          echo 'f-Fizzbuzz <br> ';
+        } elseif ($this->isDiv((int)$a, 3)) {
+          echo 'f-Fizz <br> ';
+        } elseif ($this->isDiv((int)$a, 5)) {
+          echo 'f-Buz <br> ';
+        } else {
+          echo $a . ' <br> ';
+        }
       }
+    } else {
+      throw new Exception("liste non presente");
     }
   }
 }
+echo ' <br> version class fizbuz ft <br> ';
+try {
 
-echo ' <br> version class fizbuz f <br> ';
-$fizf = new Fizf;
-$fizf->setListe($liste)->fibuzf();
+  $fizct = new Fizf;
+  $fizct->setListe($liste)->fibuzf();
+} catch (Exception $e) {
+  echo '<br>Message d\'erreur : ' . $e->getMessage();
+  echo '<br>Fichier :'.$e->getFile();
+  echo '<br>Line : '.$e->getLine();
+}
 
 
-//version en class fluent+try cach
+//version en class try cach+ fluent +doc8
 class Fizct
 {
   /**
@@ -210,14 +208,8 @@ class Fizct
    * @return  self
    */
   public function setListe(array $liste)
-  {
-    if (is_array($liste)) {
+  {    
       $this->liste = $liste;
-    } else {
-      throw new Exception("liste pas valid");
-    }
-
-
     return $this;
   }
 
