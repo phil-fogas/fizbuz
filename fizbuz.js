@@ -1,3 +1,4 @@
+'use strict';
 
 const liste = [1, 2, 3, 5, 15, 20, 30, 45, 10, 25, 90, 9, 7, 14, 22];
 //fizzbuz en une function round
