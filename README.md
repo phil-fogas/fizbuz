@@ -1,9 +1,9 @@
 # fizbuz
-<h1>défi FizzBuzz</h1>
+# défi FizzBuzz
 
 <p>en plusieurs language et plusieurs version selon du language ou niveaux de securite.</p>
 
-<h2>rapel des regles</h2>
+## rapel des regles
 <ul>
   <li>Si le nombre est un multiple de 3, vous devez imprimer "Fizz" à la place de ce nombre.</li>
 <li>Si le nombre est un multiple de 5, vous devez imprimer "Buzz" à la place de ce nombre.</li>
